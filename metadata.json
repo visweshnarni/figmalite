@@ -1,0 +1,5 @@
+{
+  "name": "Figma-Lite Collab",
+  "description": "A real-time collaborative design editor that allows users to create, edit, and share simple vector designs. It features a handwritten SVG editor, optimistic locking, and last-write-wins conflict resolution.",
+  "requestFramePermissions": []
+}
