@@ -1,14 +1,12 @@
-
 import { io, Socket } from 'socket.io-client';
 
 const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:4000';
 
-let socket: Socket;
-
-export const initSocket = (): Socket => {
-  if (socket) return socket;
-  
-  socket = io(SERVER_URL);
+export const createSocket = (): Socket => {
+  // The `forceNew` option is important to ensure that each browser tab
+  // gets its own connection, rather than sharing one. This is crucial
+  // for collaboration to work across multiple tabs.
+  const socket = io(SERVER_URL, { forceNew: true });
 
   socket.on('connect', () => {
     console.log('Connected to socket server with id:', socket.id);
@@ -19,11 +17,4 @@ export const initSocket = (): Socket => {
   });
 
   return socket;
-};
-
-export const getSocket = (): Socket => {
-    if (!socket) {
-        return initSocket();
-    }
-    return socket;
 };

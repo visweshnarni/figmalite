@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { Socket } from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
-import { getSocket, initSocket } from '@/lib/socket';
+import { createSocket } from '@/lib/socket';
 import { DesignElement, Tool, Operation, Action, Point } from '@/lib/model';
 import { UndoManager } from '@/lib/undoRedo';
 import Toolbar from './Toolbar';
@@ -66,7 +66,7 @@ export const Editor: React.FC<EditorProps> = ({ docId }) => {
 
 
   useEffect(() => {
-    const socketInstance = initSocket();
+    const socketInstance = createSocket();
     setSocket(socketInstance);
 
     socketInstance.on('connect', () => {
